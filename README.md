@@ -20,15 +20,24 @@ For example; you might be curious about Game of Thrones’s new episode and you 
 ## Running
 
 1. Create Twitter API account and get keys for [twitter_config.py](https://github.com/kaantas/spark-twitter-sentiment-analysis/blob/master/twitter_config.py)
+   
 2. Start Apache Kafka
 ```
-/bin/kafka-server-start.sh /config/server.properties
+/usr/bin/kafka/bin/kafka-server-start.sh /usr/bin/kafka/config/server.properties
 ```
+Run Zookeeper before kafka.
+```
+/usr/bin/zookeeper/bin/zkServer.sh start
+```
+
 3. Run [tweet_listener.py](https://github.com/kaantas/spark-twitter-sentiment-analysis/blob/master/tweet_listener.py) with Python version 3 and desired topic name. <br>
 ```
-PYSPARK_PYTHON=python3 bin/spark-submit tweet_listener.py "Game of Thrones"
+PYSPARK_PYTHON=python3 /usr/bin/spark-submit tweet_listener.py "Game of Thrones"
 ```
+Run this command from spark-twitter-sentiment-analysis folder.
+
 4. Run [twitter_topic_avg_sentiment_val.py](https://github.com/kaantas/spark-twitter-sentiment-analysis/blob/master/twitter_topic_avg_sentiment_val.py) with Python version 3.
 ```
-PYSPARK_PYTHON=python3 bin/spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.1.1 twitter_topic_avg_sentiment_val.py
+PYSPARK_PYTHON=python3 /usr/bin/spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.3.0 twitter_topic_avg_sentiment_val.py
 ```
+Run this command from spark-twitter-sentiment-analysis folder.
